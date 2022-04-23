@@ -60,12 +60,13 @@ var cartList = [];
 
 // Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
 class Cart {
-  constructor(name, price, type, quantity, subtotal) {
+  constructor(name, price, type, quantity, subtotal, subtotalWithDiscount) {
     this._name = name;
     this._price = price;
     this._type = type;
     this._quantity = quantity;
     this._subtotal = subtotal;
+    this._subtotalWithDiscount = subtotalWithDiscount;
   }
   get name() {
     return this._name;
@@ -78,7 +79,10 @@ class Cart {
     return this._quantity;
   } get subtotal() {
     return this._subtotal;
-  } 
+  } get subtotalWithDiscount() {
+    return this._subtotalWithDiscount;
+  }
+
 }
 
 
@@ -86,6 +90,7 @@ var cart = [];
 
 var total = 0;
 
+var countProduct = 0;
 
 
 // Exercise 1
@@ -133,10 +138,10 @@ function generateCart() {
     var price = cartList[i].price;
     var type = cartList[i].type;
     var quantity = 1;
-    var subtotal = cartList[i].price ;
-    finalCart = new Cart(name, price, type, quantity, subtotal)
+    var subtotal = cartList[i].price;
+    var subtotalWithDiscount = 0;
+    finalCart = new Cart(name, price, type, quantity, subtotal, subtotalWithDiscount)
   }
-
   let found = false;
   let i = 0;
   while (i < cart.length && !found) {
@@ -150,19 +155,29 @@ function generateCart() {
   if (!found) {
     cart.push(finalCart);
   }
-
+  countProduct++;
+  applyPromotionsCart()
   cleanCart();
-  console.log(cart)
+  document.getElementById(`count_product`).innerHTML = countProduct;
+  console.log(cart, countProduct)
 }
-
-
-
 
 
 // Exercise 5
+// Apply promotions to each item in the array "cart"
 function applyPromotionsCart() {
-  // Apply promotions to each item in the array "cart"
+  for (let i = 0; i < cart.length; i++) {
+    if (cart[i].name == "cooking oil" && cart[i].quantity >= 3) {
+      let discount = 10;
+      cart[i]._subtotalWithDiscount = discount * cart[i].quantity;
+    } else if (cart[i].name == "Instant cupcake mixture" && cart[i].quantity >= 10) {
+      discount = cart[i].price / 3 * 2;
+      cart[i]._subtotalWithDiscount = discount * cart[i].quantity;
+    }
+  }
 }
+
+
 
 // ** Nivell II **
 
@@ -182,6 +197,7 @@ function removeFromCart(id) {
 // Exercise 9
 function printCart() {
   // Fill the shopping cart modal manipulating the shopping cart dom
+
 }
 
 function open_modal() {
