@@ -41,12 +41,12 @@ function validate() {
           fLastN.classList.add("is-valid");
       }
       
-      if(password === "" || password.length < 3 ){
-          fPassword.classList.add("is-invalid");
-     }
-      else{ 
+      if(password.length > 3 && password.match(/[A-Za-z]/) && password.match(/[0-9]/) ){
           fPassword.classList.remove("is-invalid");
           fPassword.classList.add("is-valid");
+     }
+      else{ 
+          fPassword.classList.add("is-invalid");
      }
      let validEmail = /^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
      if(email === "" || email.match(validEmail) == null){
@@ -54,6 +54,7 @@ function validate() {
      }else{ 
           fEmail.classList.remove("is-invalid");
           fEmail.classList.add("is-valid");
+
      }
      if(phone === "" || phone.length < 9 || phone.length > 9){
           fPhone.classList.add("is-invalid");
