@@ -125,7 +125,7 @@ function calculateTotal() {
   for (let i = 0; i < cartList.length; i++) {
     total = total + cartList[i].price;
   }
-  console.log(total.toFixed(2))
+  console.log(`Total a pagar: ` + total.toFixed(2))
 }
 
 // Exercise 4
@@ -159,7 +159,7 @@ function generateCart() {
   applyPromotionsCart()
   cleanCart();
   document.getElementById(`count_product`).innerHTML = countProduct;
-  console.log(cart, countProduct)
+  console.log(cart, countProduct);
 }
 
 
