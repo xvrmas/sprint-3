@@ -217,6 +217,7 @@ function buy(id) {
   while (k < cart.length && !found) {
     if (cart[k].name == finalCart.name) {
       cart[k]._quantity += 1;
+      alert(`${cart[k].name} added to cart succesfully`);
       cart[k]._subtotal = cart[k].price * cart[k]._quantity;
       found = true;
     }
@@ -224,6 +225,7 @@ function buy(id) {
   }
   if (!found) {
     cart.push(finalCart);
+    alert(`${cart[k].name} added to cart succesfully`)
   }
   countProduct++;
   applyPromotionsCart()
@@ -246,28 +248,39 @@ function removeFromCart(id) {
   }
   let found = false;
   let j = 0;
-  while (j < cart.length && !found) {
-    if (element.name == cart[j].name) {
-      found = true
+  if (cart.length == 0) {
+    alert(`This item does not exist in the cart `)
+  } else {
+    while (j < cart.length && !found) {
+      if (element.name == cart[j].name) {
+        found = true
+      }
+      j++;
     }
-    j++;
-  }
-  j--;
+    j--;
 
-  if (found == true && cart[j].quantity > 1) {
-    cart[j]._quantity = cart[j]._quantity - 1;
-  } else if (cart[j].quantity == 1) {
-    cart.splice(j, 1)
-  }
+    if (found == true && cart[j].quantity > 1) {
+      cart[j]._quantity = cart[j]._quantity - 1;
+      alert(`${cart[j].name} removed from cart successfully`);
+      countProduct--;
 
+
+    } else if (cart[j].quantity <= 1) {
+      cart.splice(j, 1)
+      alert(`all this product removed from cart successfully`);
+      countProduct--;
+
+    }
+  }
+  document.getElementById(`count_product`).innerHTML = countProduct;
   console.log(element.name)
   console.log(cart)
 }
 
 // Exercise 9
+// Fill the shopping cart modal manipulating the shopping cart dom
 function printCart() {
-  // Fill the shopping cart modal manipulating the shopping cart dom
-
+  
 }
 
 function open_modal() {
