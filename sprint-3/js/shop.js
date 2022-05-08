@@ -56,6 +56,7 @@ var products = [
   },
 ];
 // Array with products (objects) added directly with push(). Products in this array are repeated.
+
 var cartList = [];
 
 // Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
@@ -82,7 +83,9 @@ class Cart {
   } get subtotalWithDiscount() {
     return this._subtotalWithDiscount;
   }
-
+  toString(){
+    return `Item: ${this._name}, quantity: ${this._quantity}, total: ${this._subtotal}`;
+  }
 }
 
 
@@ -122,6 +125,7 @@ function calculateTotal() {
   for (let i = 0; i < cart.length; i++) {
     total += cart[i].subtotal;
   }
+  printCart();
   console.log(`Total a pagar: ` + total.toFixed(2));
   total = 0;
 }
@@ -205,7 +209,7 @@ function removeFromCart(id) {
   let found = false;
   let j = 0;
   if (cart.length == 0) {
-    alert(`This item does not exist in the cart `)
+    alert(`The cart is empty `)
   } else {
     while (j < cart.length && !found) {
       if (element.name == cart[j].name) {
@@ -214,8 +218,9 @@ function removeFromCart(id) {
       j++;
     }
     j--;
-
-    if (found == true && cart[j].quantity > 1) {
+    if (found == false) {
+      alert(`This item is not in the cart`)
+    } else if (found == true && cart[j].quantity > 1) {
       cart[j]._quantity = cart[j]._quantity - 1;
       cart[j]._subtotal = cart[j].price * cart[j]._quantity;
       alert(`${cart[j].name} removed from cart successfully`);
@@ -225,13 +230,20 @@ function removeFromCart(id) {
     }
   }
   calculateTotal()
-  console.log(cart,)
+  console.log(cart);
 }
 
 // Exercise 9
 // Fill the shopping cart modal manipulating the shopping cart dom
 function printCart() {
-
+  const showCart = document.querySelectorAll(`ul`)[2];
+  cart.forEach(item => {
+    const li = document.createElement(`li`);
+    li.textContent = item;
+    showCart.appendChild(li)
+  });
+  console.log(cartList);
+  
 }
 
 function open_modal() {
