@@ -83,9 +83,9 @@ class Cart {
   } get subtotalWithDiscount() {
     return this._subtotalWithDiscount;
   }
-  toString(){
-    return `Item: ${this._name}, quantity: ${this._quantity}, total: ${this._subtotal}`;
-  }
+  // toString() {
+  //   return `Item: ${this._name}, quantity: ${this._quantity}, total: ${this._subtotal}`;
+  // }
 }
 
 
@@ -106,7 +106,6 @@ function buy(id) {
     }
     counter++;
   }
-  console.log(cartList);
   generateCart()
 }
 
@@ -192,7 +191,7 @@ function applyPromotionsCart() {
 // 2. Add found product to the cart array or update its quantity in case it has been added previously.
 function addToCart(id) {
   //Habia hecho la refactorizacion pero finalmente no se diferenciaba mucho al codigo de la funcion generateCart()
-  // y he preferido dejarlo como estaba y hacer el removeFromCart(id)  y un poco de css.
+  // y he preferido dejarlo como estaba y hacer el removeFromCart(id), intentar el printcar() y un poco de css.
 }
 // Exercise 8
 function removeFromCart(id) {
@@ -236,14 +235,15 @@ function removeFromCart(id) {
 // Exercise 9
 // Fill the shopping cart modal manipulating the shopping cart dom
 function printCart() {
-  const showCart = document.querySelectorAll(`ul`)[2];
-  cart.forEach(item => {
-    const li = document.createElement(`li`);
-    li.textContent = item;
-    showCart.appendChild(li)
-  });
-  console.log(cartList);
-  
+  // const showCart = document.querySelectorAll(`ul`)[2];
+
+  // for (let i = 0; i < cart.length; i++) {
+  //   const li = document.createElement(`li`);
+  //   li.textContent = cart[i];
+  //   showCart.appendChild(li)
+  // }
+  // console.log(cartList);
+
 }
 
 function open_modal() {
